@@ -1,6 +1,9 @@
 import logging
-import urllib3
+import os
+from pathlib import Path
+
 from environs import Env
+from google.cloud import dialogflow
 from telegram import Update, ForceReply
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 
@@ -31,13 +34,28 @@ def help_command(update: Update, context: CallbackContext) -> None:
 
 def echo(update: Update, context: CallbackContext) -> None:
     """Echo the user message."""
-    update.message.reply_text(update.message.text)
+    session_id = update.effective_user.id
+    text = update.message.text
+    message_text = detect_intent_text(project_id, session_id, text, language_code="ru")
+    update.message.reply_text(message_text)
 
+
+def detect_intent_text(project_id, session_id, text, language_code):
+    """Returns the result of detect intent with text as input.
+
+    Using the same `session_id` between requests allows continuation
+    of the conversation."""
+
+    session_client = dialogflow.SessionsClient()
+    session = session_client.session_path(project_id, session_id)
+    text_input = dialogflow.TextInput(text=text, language_code=language_code)
+    query_input = dialogflow.QueryInput(text=text_input)
+    response = session_client.detect_intent(
+        request={"session": session, "query_input": query_input}
+    )
+    return response.query_result.fulfillment_text
 
 def main() -> None:
-    env = Env()
-    env.read_env()
-    bot_token = env.str("BOT_TOKEN")
     """Start the bot."""
     # Create the Updater and pass it your bot's token.
     updater = Updater(bot_token)
@@ -62,4 +80,14 @@ def main() -> None:
 
 
 if __name__ == '__main__':
+    env = Env()
+    env.read_env()
+
+    BASE_DIR = Path.cwd()
+    GOOGLE_APPLICATION_CREDENTIALS = os.path.join(
+        BASE_DIR,
+        env.str("GOOGLE_APPLICATION_CREDENTIALS")
+    )
+    project_id = env.str("PROJECT_ID")
+    bot_token = env.str("BOT_TOKEN")
     main()
