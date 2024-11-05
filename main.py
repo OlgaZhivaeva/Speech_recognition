@@ -82,12 +82,12 @@ def main() -> None:
 if __name__ == '__main__':
     env = Env()
     env.read_env()
-
-    BASE_DIR = Path.cwd()
-    GOOGLE_APPLICATION_CREDENTIALS = os.path.join(
-        BASE_DIR,
-        env.str("GOOGLE_APPLICATION_CREDENTIALS")
-    )
+    GOOGLE_CLOUD_PROJECT = env.str("GOOGLE_CLOUD_PROJECT")
+    # BASE_DIR = Path.cwd()
+    # GOOGLE_APPLICATION_CREDENTIALS = os.path.join(
+    #     BASE_DIR,
+    #     env.str("GOOGLE_APPLICATION_CREDENTIALS")
+    # )
     project_id = env.str("PROJECT_ID")
     bot_token = env.str("BOT_TOKEN")
     main()
