@@ -1,6 +1,3 @@
-import os
-from pathlib import Path
-
 from environs import Env
 from google.cloud import api_keys_v2
 from google.cloud.api_keys_v2 import Key
@@ -10,7 +7,6 @@ def create_api_key(project_id: str, suffix: str) -> Key:
     """
     Creates and restrict an API key. Add the suffix for uniqueness.
 
-    TODO(Developer):
     1. Before running this sample,
       set up ADC as described in https://cloud.google.com/docs/authentication/external/set-up-adc
     2. Make sure you have the necessary permission to create API keys.
@@ -45,12 +41,6 @@ if __name__ == '__main__':
 
     env = Env()
     env.read_env()
-
-    BASE_DIR = Path.cwd()
-    GOOGLE_APPLICATION_CREDENTIALS = os.path.join(
-        BASE_DIR,
-        env.str("GOOGLE_APPLICATION_CREDENTIALS")
-    )
 
     project_id = env.str("PROJECT_ID")
     suffix = "dialog_flow_api-key"

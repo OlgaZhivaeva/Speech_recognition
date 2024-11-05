@@ -40,7 +40,8 @@ if __name__ == '__main__':
         training_phrases_json = my_file.read()
 
     training_phrases = json.loads(training_phrases_json)
-    display_name = "Устройство на работу"
-    training_phrases_parts = training_phrases[display_name]["questions"]
-    message_texts = [training_phrases[display_name]["answer"]]
-    create_intent(project_id, display_name, training_phrases_parts, message_texts)
+
+    for display_name in training_phrases:
+        training_phrases_parts = training_phrases[display_name]["questions"]
+        message_texts = [training_phrases[display_name]["answer"]]
+        create_intent(project_id, display_name, training_phrases_parts, message_texts)
