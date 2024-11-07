@@ -3,10 +3,6 @@ from environs import Env
 from vk_api.longpoll import VkLongPoll, VkEventType
 
 def main():
-    vk_session = vk_api.VkApi(token=vk_group_token)
-
-    longpoll = VkLongPoll(vk_session)
-
     for event in longpoll.listen():
         if event.type == VkEventType.MESSAGE_NEW:
             print('Новое сообщение:')
@@ -23,4 +19,7 @@ if __name__ == '__main__':
     env.read_env()
 
     vk_group_token = env.str('VK_GROUP_TOKEN')
+    vk_session = vk_api.VkApi(token=vk_group_token)
+    longpoll = VkLongPoll(vk_session)
+
     main()
