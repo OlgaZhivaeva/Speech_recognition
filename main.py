@@ -55,6 +55,7 @@ def detect_intent_text(project_id, session_id, text, language_code):
     )
     return response.query_result.fulfillment_text
 
+
 def main() -> None:
     """Start the bot."""
     # Create the Updater and pass it your bot's token.
