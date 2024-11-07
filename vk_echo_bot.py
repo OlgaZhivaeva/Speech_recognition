@@ -4,11 +4,13 @@ import vk_api as vk
 from environs import Env
 from vk_api.longpoll import VkLongPoll, VkEventType
 
+from main import detect_intent_text
+
 
 def echo(event, vk_api):
     vk_api.messages.send(
         user_id=event.user_id,
-        message=event.text,
+        message=detect_intent_text(project_id=project_id, session_id=event.user_id, text=event.text, language_code="ru"),
         random_id=random.randint(1,1000)
     )
 
@@ -17,6 +19,7 @@ if __name__ == "__main__":
 
     env = Env()
     env.read_env()
+    project_id = env.str("PROJECT_ID")
 
     vk_group_token = env.str('VK_GROUP_TOKEN')
 
