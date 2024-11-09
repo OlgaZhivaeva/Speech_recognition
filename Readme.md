@@ -48,8 +48,8 @@ Create DialogFlow API key by running the script run.py
 python run.py
 ```
 
-In the project directory, create a file `training_phrases.json` containing possible questions and
-an answer options  based on the [sample]()
+In the project directory, replace the file `training_phrases.json` containing possible questions and
+an answer options on your own based on the [sample](https://github.com/OlgaZhivaeva/Speech_recognition/blob/main/training_phrases.json)
 
 Train the agent by running the script `intent.py`
 ```commandline
