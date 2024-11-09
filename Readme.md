@@ -1,10 +1,14 @@
 # Speech recognition
 
-A project for speech recognition using the DialogFlow API
+The project is designed to create chatbots in Telegram and Vk for speech recognition
+using DialogFlou API
 
 ### How to install
 
 Clone the repository
+```commandline
+git clone https://github.com/OlgaZhivaeva/Speech_recognition
+```
 
 Create a virtual environment in the project directory and activate it
 
@@ -23,12 +27,16 @@ Create a [project in DialogFlow](https://cloud.google.com/dialogflow/es/docs/qui
 
 Create a [Dialogflow agent](https://cloud.google.com/dialogflow/es/docs/quick/build-agent) for your project
 
+Create a telegram bot for error logging
+
 Create a file `.env` in the project directory:
 
 ```commandline
 BOT_TOKEN=Your telegram bot token
 VK_GROUP_TOKEN=Your VK API token
 PROJECT_ID=Your DialogFlow project ID
+TG_CHAT_ID=Your Telegram Chat ID
+LOG_BOT_TOKEN=Bot token for error logging
 ```
 
 ### Train the DialogFlow agent
