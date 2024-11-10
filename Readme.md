@@ -11,6 +11,10 @@ git clone https://github.com/OlgaZhivaeva/Speech_recognition
 ```
 
 Create a virtual environment in the project directory and activate it
+```commandline
+python3 -m venv venv
+source venv/bin/activate
+```
 
 Python3 should be already installed.
 
@@ -53,18 +57,19 @@ an answer options on your own based on the [sample](https://github.com/OlgaZhiva
 
 Train the agent by running the script `intent.py`
 ```commandline
-python intent.py
+python3 intent.py
 ```
 
 ### Run the bots
 
 ```commandline
-python tg_bot.py
-python vk_bot.py
+python3 tg_bot.py
+python3 vk_bot.py
 ```
-
+Example of tg bot
 ![Example of tg bot](https://github.com/OlgaZhivaeva/Speech_recognition/blob/main/demo_tg_bot.gif)
 
+Example of vk bot
 ![Example of vk bot](https://github.com/OlgaZhivaeva/Speech_recognition/blob/main/demo_vk_bot.gif)
 
 ### Project Goals
