@@ -1,6 +1,4 @@
 import logging
-import os
-from pathlib import Path
 
 from environs import Env
 from telegram import Update, ForceReply, Bot
@@ -55,11 +53,7 @@ if __name__ == '__main__':
     env = Env()
     env.read_env()
     GOOGLE_CLOUD_PROJECT = env.str("GOOGLE_CLOUD_PROJECT")
-    # BASE_DIR = Path.cwd()
-    # GOOGLE_APPLICATION_CREDENTIALS = os.path.join(
-    #     BASE_DIR,
-    #     env.str("GOOGLE_APPLICATION_CREDENTIALS")
-    # )
+    GOOGLE_APPLICATION_CREDENTIALS = env.str("GOOGLE_APPLICATION_CREDENTIALS")
     project_id = env.str("PROJECT_ID")
     bot_token = env.str("BOT_TOKEN")
     tg_chat_id = env.str("TG_CHAT_ID")

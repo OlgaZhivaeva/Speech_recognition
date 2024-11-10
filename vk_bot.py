@@ -33,6 +33,7 @@ if __name__ == "__main__":
     env.read_env()
     project_id = env.str("PROJECT_ID")
     GOOGLE_CLOUD_PROJECT = env.str("GOOGLE_CLOUD_PROJECT")
+    GOOGLE_APPLICATION_CREDENTIALS = env.str("GOOGLE_APPLICATION_CREDENTIALS")
     vk_group_token = env.str('VK_GROUP_TOKEN')
     tg_chat_id = env.str('TG_CHAT_ID')
     log_bot_token = env.str('LOG_BOT_TOKEN')
