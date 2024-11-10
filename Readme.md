@@ -64,6 +64,7 @@ python vk_bot.py
 ```
 
 ![Example of tg bot](https://github.com/OlgaZhivaeva/Speech_recognition/blob/main/demo_tg_bot.gif)
+
 ![Example of vk bot](https://github.com/OlgaZhivaeva/Speech_recognition/blob/main/demo_vk_bot.gif)
 
 ### Project Goals
