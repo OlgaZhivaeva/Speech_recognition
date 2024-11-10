@@ -63,7 +63,7 @@ python tg_bot.py
 python vk_bot.py
 ```
 
-![Example](demo_tg_bot_gif)
+![](https://github.com/OlgaZhivaeva/Speech_recognition/blob/main/demo_tg_bot.gif)
 
 
 ### Project Goals
