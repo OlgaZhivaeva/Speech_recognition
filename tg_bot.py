@@ -7,7 +7,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, Callb
 from detect_intent_text import detect_intent_text
 from log_handler import TelegramLogsHandler
 
-logger = logging.getLogger(__name__)
+
 
 
 def start(update: Update, context: CallbackContext) -> None:
@@ -36,6 +36,29 @@ def respond(update: Update, context: CallbackContext) -> None:
 
 
 def main() -> None:
+    def respond(update: Update, context: CallbackContext) -> None:
+        """Respond the user message."""
+        try:
+            session_id = update.effective_user.id
+            text = update.message.text
+            message_text = detect_intent_text(project_id, session_id, text, language_code="ru")
+            update.message.reply_text(message_text.fulfillment_text)
+        except Exception as err:
+            logger.exception(err)
+
+    env = Env()
+    env.read_env()
+    GOOGLE_CLOUD_PROJECT = env.str("GOOGLE_CLOUD_PROJECT")
+    GOOGLE_APPLICATION_CREDENTIALS = env.str("GOOGLE_APPLICATION_CREDENTIALS")
+    project_id = env.str("PROJECT_ID")
+    bot_token = env.str("TELEGRAM_BOT_TOKEN")
+    tg_chat_id = env.str("TG_CHAT_ID")
+    log_bot_token = env.str('LOG_BOT_TOKEN')
+    log_bot = Bot(token=log_bot_token)
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.DEBUG)
+    logger.addHandler(TelegramLogsHandler(log_bot, tg_chat_id))
+    logger.info("Запуск телеграмм бота")
     updater = Updater(bot_token)
     dispatcher = updater.dispatcher
 
@@ -50,16 +73,4 @@ def main() -> None:
 
 
 if __name__ == '__main__':
-    env = Env()
-    env.read_env()
-    GOOGLE_CLOUD_PROJECT = env.str("GOOGLE_CLOUD_PROJECT")
-    GOOGLE_APPLICATION_CREDENTIALS = env.str("GOOGLE_APPLICATION_CREDENTIALS")
-    project_id = env.str("PROJECT_ID")
-    bot_token = env.str("TELEGRAM_BOT_TOKEN")
-    tg_chat_id = env.str("TG_CHAT_ID")
-    log_bot_token = env.str('LOG_BOT_TOKEN')
-    log_bot = Bot(token=log_bot_token)
-    logger.setLevel(logging.DEBUG)
-    logger.addHandler(TelegramLogsHandler(log_bot, tg_chat_id))
-    logger.info("Запуск телеграмм бота")
     main()

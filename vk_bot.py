@@ -11,23 +11,22 @@ from detect_intent_text import detect_intent_text
 from log_handler import TelegramLogsHandler
 
 
-def respond(event, vk_api):
-    try:
-        message = detect_intent_text(project_id=project_id, session_id=event.user_id, text=event.text, language_code="ru")
-        if not message.intent.is_fallback:
-            vk_api.messages.send(
-                user_id=event.user_id,
-                message=message.fulfillment_text,
-                random_id=random.randint(1,1000)
-            )
-            logger.info("Бот ответил")
-        else:
-            logger.info("Бот не может ответить")
-    except Exception as err:
-        logger.exception(err)
-
-
-if __name__ == "__main__":
+def main():
+    def respond(event, vk_api):
+        try:
+            message = detect_intent_text(project_id=project_id, session_id=event.user_id, text=event.text,
+                                         language_code="ru")
+            if not message.intent.is_fallback:
+                vk_api.messages.send(
+                    user_id=event.user_id,
+                    message=message.fulfillment_text,
+                    random_id=random.randint(1, 1000)
+                )
+                logger.info("Бот ответил")
+            else:
+                logger.info("Бот не может ответить")
+        except Exception as err:
+            logger.exception(err)
 
     env = Env()
     env.read_env()
@@ -49,3 +48,7 @@ if __name__ == "__main__":
     for event in longpoll.listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me:
             respond(event, vk_api)
+
+
+if __name__ == "__main__":
+    main()
