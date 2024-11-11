@@ -55,7 +55,7 @@ if __name__ == '__main__':
     GOOGLE_CLOUD_PROJECT = env.str("GOOGLE_CLOUD_PROJECT")
     GOOGLE_APPLICATION_CREDENTIALS = env.str("GOOGLE_APPLICATION_CREDENTIALS")
     project_id = env.str("PROJECT_ID")
-    bot_token = env.str("BOT_TOKEN")
+    bot_token = env.str("TELEGRAM_BOT_TOKEN")
     tg_chat_id = env.str("TG_CHAT_ID")
     log_bot_token = env.str('LOG_BOT_TOKEN')
     log_bot = Bot(token=log_bot_token)

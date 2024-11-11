@@ -36,7 +36,7 @@ Create a telegram bot for error logging
 Create a file `.env` in the project directory:
 
 ```commandline
-BOT_TOKEN=Your telegram bot token
+TELEGRAM_BOT_TOKEN=Your telegram bot token
 VK_GROUP_TOKEN=Your VK API token
 PROJECT_ID=Your DialogFlow project ID
 TG_CHAT_ID=Your Telegram Chat ID
