@@ -8,8 +8,6 @@ from detect_intent_text import detect_intent_text
 from log_handler import TelegramLogsHandler
 
 
-
-
 def start(update: Update, context: CallbackContext) -> None:
     """Send a message when the command /start is issued."""
     user = update.effective_user
@@ -19,20 +17,9 @@ def start(update: Update, context: CallbackContext) -> None:
     )
 
 
-def help_command(update: Update, context: CallbackContext) -> None:
+def help(update: Update, context: CallbackContext) -> None:
     """Send a message when the command /help is issued."""
     update.message.reply_text('Help!')
-
-
-def respond(update: Update, context: CallbackContext) -> None:
-    """Respond the user message."""
-    try:
-        session_id = update.effective_user.id
-        text = update.message.text
-        message_text = detect_intent_text(project_id, session_id, text, language_code="ru")
-        update.message.reply_text(message_text.fulfillment_text)
-    except Exception as err:
-        logger.exception(err)
 
 
 def main() -> None:
@@ -63,7 +50,7 @@ def main() -> None:
     dispatcher = updater.dispatcher
 
     dispatcher.add_handler(CommandHandler("start", start))
-    dispatcher.add_handler(CommandHandler("help", help_command))
+    dispatcher.add_handler(CommandHandler("help", help))
 
     dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, respond))
 
