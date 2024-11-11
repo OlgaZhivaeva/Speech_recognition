@@ -14,7 +14,8 @@ from log_handler import TelegramLogsHandler
 def main():
     def respond(event, vk_api):
         try:
-            message = detect_intent_text(project_id=project_id, session_id=event.user_id, text=event.text,
+            session_id = 'vk-' + str(event.user_id)
+            message = detect_intent_text(project_id=project_id, session_id=session_id, text=event.text,
                                          language_code="ru")
             if not message.intent.is_fallback:
                 vk_api.messages.send(

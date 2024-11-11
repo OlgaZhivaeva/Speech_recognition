@@ -32,11 +32,13 @@ def create_api_key(project_id: str, suffix: str) -> Key:
     return response
 
 
-if __name__ == '__main__':
-
+def main():
     env = Env()
     env.read_env()
 
     project_id = env.str("PROJECT_ID")
     suffix = "dialog_flow_api-key"
     create_api_key(project_id, suffix)
+
+if __name__ == '__main__':
+    main()

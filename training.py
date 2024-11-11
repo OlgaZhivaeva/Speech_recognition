@@ -29,8 +29,7 @@ def create_intent(project_id, display_name, training_phrases_parts, message_text
     print("Intent created: {}".format(response))
 
 
-if __name__ == '__main__':
-
+def main():
     env = Env()
     env.read_env()
     project_id = env.str("PROJECT_ID")
@@ -44,3 +43,7 @@ if __name__ == '__main__':
         training_phrases_parts = training_phrases[display_name]["questions"]
         message_texts = [training_phrases[display_name]["answer"]]
         create_intent(project_id, display_name, training_phrases_parts, message_texts)
+
+
+if __name__ == '__main__':
+    main()
