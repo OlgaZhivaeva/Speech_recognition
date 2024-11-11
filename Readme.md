@@ -49,7 +49,7 @@ LOG_BOT_TOKEN=Bot token for error logging
 
 Create DialogFlow API key by running the script run.py
 ```commandline
-python run.py
+python df_api_key.py
 ```
 
 In the project directory, replace the file `training_phrases.json` containing possible questions and
@@ -57,7 +57,7 @@ an answer options on your own based on the [sample](https://github.com/OlgaZhiva
 
 Train the agent by running the script `intent.py`
 ```commandline
-python3 intent.py
+python3 training.py
 ```
 
 ### Run the bots
