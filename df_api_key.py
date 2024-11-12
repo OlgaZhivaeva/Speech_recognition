@@ -28,7 +28,6 @@ def create_api_key(project_id: str, suffix: str) -> Key:
 
     response = client.create_key(request=request).result()
 
-    print(f"Successfully created an API key: {response.name}")
     return response
 
 
@@ -38,7 +37,9 @@ def main():
 
     project_id = env.str("PROJECT_ID")
     suffix = "dialog_flow_api-key"
-    create_api_key(project_id, suffix)
+    response = create_api_key(project_id, suffix)
+    print(f"Successfully created an API key: {response.name}")
+
 
 if __name__ == '__main__':
     main()

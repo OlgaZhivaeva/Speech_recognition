@@ -21,13 +21,10 @@ def create_intent(project_id, display_name, training_phrases_parts, message_text
     intent = dialogflow.Intent(
         display_name=display_name, training_phrases=training_phrases, messages=[message]
     )
-
     response = intents_client.create_intent(
         request={"parent": parent, "intent": intent}
     )
-
-    print("Intent created: {}".format(response))
-
+    return response
 
 def main():
     env = Env()
@@ -42,8 +39,8 @@ def main():
     for display_name in training_phrases:
         training_phrases_parts = training_phrases[display_name]["questions"]
         message_texts = [training_phrases[display_name]["answer"]]
-        create_intent(project_id, display_name, training_phrases_parts, message_texts)
-
+        response = create_intent(project_id, display_name, training_phrases_parts, message_texts)
+        print("Intent created: {}".format(response))
 
 if __name__ == '__main__':
     main()
