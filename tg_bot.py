@@ -26,7 +26,7 @@ def main() -> None:
     def respond(update: Update, context: CallbackContext) -> None:
         """Respond the user message."""
         try:
-            session_id = 'tg-' + str(update.effective_user.id)
+            session_id = f'tg-{update.effective_user.id}'
             text = update.message.text
             message_text = detect_intent_text(project_id, session_id, text, language_code="ru")
             update.message.reply_text(message_text.fulfillment_text)
